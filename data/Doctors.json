@@ -1,0 +1,13 @@
+{
+    "metiers_medicaux":[
+        "Docteur",
+        "Dr",
+        "Dr.",
+        "Médecin",
+        "Infirmier",
+        "Infirmière",
+        "Radiologue",
+        "Chirurgien",
+        "Chirurgienne"
+    ]
+}
