@@ -5,13 +5,7 @@ We are trying to predict the patient's first and last names for a given medical 
 
 ### Dataset
 
-Let's imagine we have a dataset with 100k unlabeled documents medical documents. See below 3 examples:
-
-
-![docs](https://user-images.githubusercontent.com/51329768/253037781-0d834349-9da9-47e9-8108-4cf62912c229.png)
-
-
-
+Let's imagine we have a dataset with 100k unlabeled documents medical documents. 
 For each document we have a json representation that gives us absolute coordinates for each word, for exemple:
 
 ```json
@@ -20,10 +14,55 @@ For each document we have a json representation that gives us absolute coordinat
 
 We have the target outputs: first and last names and we want to be able to predict them automatically for each new document.
 
-## Implementations
 
-### 1. Simple Heuristic
+## Features
+- Extracts patient names from medical reports.
+- Supports JSON input format.
+- Utilizes dictionaries for French words, doctor titles, and first names to improve accuracy.
 
-I used a very simple approach for this implementation. I downloaded a list of first names from all over the world and try to match the first names in the document with the list of first names. If the first name is in the list, I consider it as a first name. I then look at the words that are before and after the first name to see if they are words from the dictionnary. If they are, I do not consider them as last names. Otherwise, if they are not in the dictionnary, I consider them as last names, and I have a match.
-The other problem I faced, is that in the document, you can find multiple names, like the name of the doctor. I tried to filter them out by looking at the few words around the name and see if they are in a lis of titles (like Doctor, Professor, etc...). If they are, I do not consider the match to be the patient's name.
-If the 
+## Installation
+To set up the project, follow these steps:
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/Nasotro/Lifen_preproject.git
+    cd Lifen_preproject
+    ```
+
+2. Install the required dependencies:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+## Usage
+To use the project, follow these steps:
+
+1. Prepare your medical report in JSON format.
+2. Place the JSON file in the `data/input/` directory.
+3. Run the script to extract patient names:
+    ```sh
+    python main.py data/input/example.json output/output.json
+    ```
+
+
+
+## Solution 
+
+### Simple Heuristic
+
+The implementation uses a straightforward heuristic approach to predict names:
+
+1. **First Name Matching**: A comprehensive list of first names from around the world is used to match potential first names in the document. If a word in the document matches a name in the list, it is considered a first name.
+
+2. **Last Name Identification**: Words surrounding the identified first name are analyzed. If these words are not found in a standard dictionary, they are considered potential last names. This helps in filtering out common words that are not names.
+
+3. **Title Filtering**: To address the challenge of multiple names in the document (e.g., the name of a doctor), the heuristic checks the words around the identified names. If these words match a list of titles (e.g., Doctor, Professor), the name is not considered the patient's name.
+
+This approach ensures that the predicted names are more likely to be accurate by filtering out common words and titles.
+
+### Improvements
+- Add unit tests.
+- User Interface for easy interaction ?
+- Security measures to protect patient data.
+- Performance optimization.
+- Support for additional languages.

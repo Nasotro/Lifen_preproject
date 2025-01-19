@@ -1,3 +1,9 @@
 /test.ipynb
 
 /venv/
+
+/models/__pycache__/
+
+/tests/
+
+*.pyc

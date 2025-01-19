@@ -1,8 +1,15 @@
 import os
 from models.Document import Document
+import argparse
 
-input_path = os.path.join('data', 'input', 'example.json')
-output_path = os.path.join('output', 'output.json')
+# Set up argument parser
+parser = argparse.ArgumentParser(description='Process input and output file paths.')
+parser.add_argument('input_path', type=str, help='Path to the input JSON file')
+parser.add_argument('output_path', type=str, help='Path to the output JSON file')
 
-doc = Document(input_path)
-doc.write_all_names_json(output_path)
+# Parse arguments
+args = parser.parse_args()
+
+# Create a Document object and write all extracted names to a JSON file
+doc = Document(args.input_path)
+doc.write_all_names_json(args.output_path)
